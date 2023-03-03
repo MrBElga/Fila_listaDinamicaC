@@ -10,6 +10,7 @@ char menu(){
 	printf("[B] - POP\n");
 	printf("[C] - ELEMENTO INICIO\n");
 	printf("[D] - EXIBE\n");
+	
 	printf("[ESC] - OPCAO:");
 
 	return toupper(getche());
@@ -23,31 +24,28 @@ int main(){
 	fila *f;
 	
 	init(&f);
-
 	do{
 		op = menu();
 		system("cls");
 		switch (op){
 			case 'A':
 				scanf("%d", &aux);
-				push(&f,aux);
+				Enqueue(&f,aux);
 			break;
 			case 'B':
-				pop(&f);
+				scanf("%d", &aux);
+				Dequeue(&f,&aux);
 			break;
-
 			case 'C':
 			if(f!=NULL)
 				printf("%d",top(f));
 				getch();
 			break;
 			case 'D':
-				exibe(f);
-				
+				exibe(f);				
 				getch();
 			break;
 		}
 	}while(op!=27);
-
 	return 0;
 }

@@ -3,6 +3,7 @@
 #include <conio2.h>
 #include <windows.h>
 
+
 struct Fila{
     int info;
     struct Fila *prox;
@@ -13,42 +14,43 @@ void init(fila **inicio){
         *inicio = NULL;
 }
 
-void push(fila **inicio, int info){
-    fila *nova = (fila*) malloc(sizeof(fila)), *aux, *ant;
-    nova->info = info;
-    nova->prox = NULL;
-    if(!*inicio)
-        *inicio = nova;
-    else
-    {
-        ant = *inicio; aux = (*inicio)->prox;
-        while(aux)
-        {
-            ant = aux;
-            aux = aux->prox;
-        }
-        ant->prox = nova;
-    }
-}
-
-void pop(fila **inicio){
-    fila *aux = *inicio;
-    aux = aux->prox; 
-    *inicio = aux;
-}
-
-int top(fila *inicio){
-
-    return inicio->info;
-    
-    
-}
-
-int isEmpety(fila *inicio){
+char QisEmpety(fila *inicio){
 	return inicio == NULL;
 }
 
+void Enqueue(fila **inicio, int info){
+    fila *nova = (fila*) malloc(sizeof(fila)), *aux = *inicio;
+    nova->info = info;
+    nova->prox = NULL;
+    if(!QisEmpety(*inicio)){
+       while(aux->prox !=NULL)
+        {
+            aux = aux -> prox;
+        }
+        aux->prox = nova;
+    }
+    else
+    {
+    	 *inicio = nova;
+        
+    }
+}
 
+void Dequeue(fila **inicio, int *info ){
+    fila *aux = *inicio;
+    if(!QisEmpety(*inicio)){      
+		*info = (*inicio)->info;
+		*inicio = (*inicio)->prox;
+		free(aux);	
+	}
+	else{
+		*info = -1;
+	}
+}
+ 
+int top(fila *inicio){
+    return inicio->info;    
+}
 
 void exibe(fila *inicio){
     system("cls");
