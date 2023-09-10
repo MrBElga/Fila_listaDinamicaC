@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <conio2.h>
-#include <windows.h>
-
-
 struct Fila{
     int info;
     struct Fila *prox;
